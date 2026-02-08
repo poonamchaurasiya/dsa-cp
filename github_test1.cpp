@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
 int main (){
-    cout << " my name";
+    cout << "Github add, commit, push test";
     return 0;
 }
