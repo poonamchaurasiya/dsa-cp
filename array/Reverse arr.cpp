@@ -9,7 +9,7 @@ void reverse ( int arr [],int n)
         arr [low]=arr [high];
         arr [high]= temp;
         low ++;
-        high --;
+        high --; 
     }
 
 }
