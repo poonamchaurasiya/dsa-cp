@@ -6,6 +6,7 @@ void reverse(int arr[], int n)
     for (int i = 0;i <n, i++)
     arr [n-1]= arr [i];
     arr [n-1]= temp;
+    return 0;
 }
 
 
