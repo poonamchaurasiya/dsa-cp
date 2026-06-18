@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #070b12; }
+  @keyframes ccDrift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+</style>
+</helmet>
+
+<div style="width:1584px; height:396px; position:relative; overflow:hidden; background:radial-gradient(120% 140% at 18% 30%, #16202f 0%, #0e1623 42%, #080d16 100%); font-family:'JetBrains Mono', ui-monospace, monospace;">
+
+  <!-- soft top sheen -->
+  <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0) 30%); pointer-events:none;"></div>
+
+  <!-- ===== LEFT: blurred unreadable code ===== -->
+  <div style="position:absolute; left:0; top:0; width:760px; height:100%; padding:44px 0 44px 72px; box-sizing:border-box; display:flex; flex-direction:column; justify-content:center; gap:11px; filter:blur(2.4px); opacity:0.5; -webkit-mask-image:linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 90%); mask-image:linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 14%, rgba(0,0,0,1) 52%, rgba(0,0,0,0) 90%);">
+    <div style="font-size:14px; line-height:1; letter-spacing:0.3px; color:#5fd3c8; white-space:nowrap;"><span style="color:#7c8aa3;">import</span> { <span style="color:#a9b4c9;">graph, render</span> } <span style="color:#7c8aa3;">from</span> <span style="color:#c4a6f5;">'./core'</span></div>
+    <div style="font-size:14px; line-height:1; color:#8e9ab2; white-space:nowrap;">&nbsp;</div>
+    <div style="font-size:14px; line-height:1; color:#7c8aa3; white-space:nowrap;"><span style="color:#c4a6f5;">const</span> <span style="color:#6fd6cb;">net</span> = <span style="color:#c4a6f5;">async</span> (nodes) => {</div>
+    <div style="font-size:14px; line-height:1; color:#9aa6bd; white-space:nowrap;">&nbsp;&nbsp;<span style="color:#c4a6f5;">const</span> edges = nodes.<span style="color:#6fd6cb;">map</span>((n) => weave(n))</div>
+    <div style="font-size:14px; line-height:1; color:#9aa6bd; white-space:nowrap;">&nbsp;&nbsp;<span style="color:#c4a6f5;">for</span> (<span style="color:#c4a6f5;">const</span> e <span style="color:#c4a6f5;">of</span> edges) propagate(e, <span style="color:#5fd3c8;">0.42</span>)</div>
+    <div style="font-size:14px; line-height:1; color:#9aa6bd; white-space:nowrap;">&nbsp;&nbsp;<span style="color:#c4a6f5;">return</span> activate(edges, { bias: <span style="color:#5fd3c8;">true</span> })</div>
+    <div style="font-size:14px; line-height:1; color:#7c8aa3; white-space:nowrap;">}</div>
+    <div style="font-size:14px; line-height:1; color:#8e9ab2; white-space:nowrap;">&nbsp;</div>
+    <div style="font-size:14px; line-height:1; color:#9aa6bd; white-space:nowrap;"><span style="color:#c4a6f5;">export</span> <span style="color:#c4a6f5;">default</span> render(net, layer)</div>
+    <div style="font-size:14px; line-height:1; color:#5f6c84; white-space:nowrap;"><span style="color:#5a6680;">// connect · learn · ship</span></div>
+  </div>
+
+  <!-- ===== RIGHT: neural network graph + bokeh ===== -->
+  <svg width="1584" height="396" viewBox="0 0 1584 396" style="position:absolute; inset:0;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="ccGlow" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="3" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="ccSoft" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="22"/>
+      </filter>
+      <radialGradient id="ccTealDot" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#9af6ec"/><stop offset="55%" stop-color="#2dd4bf"/><stop offset="100%" stop-color="#0f766e"/>
+      </radialGradient>
+      <radialGradient id="ccVioDot" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ddd0ff"/><stop offset="55%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#6d28d9"/>
+      </radialGradient>
+      <linearGradient id="ccEdgeT" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.15"/><stop offset="100%" stop-color="#5eead4" stop-opacity="0.8"/>
+      </linearGradient>
+      <linearGradient id="ccEdgeV" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.15"/><stop offset="100%" stop-color="#c4b5fd" stop-opacity="0.8"/>
+      </linearGradient>
+    </defs>
+
+    <!-- bokeh depth-of-field -->
+    <g opacity="0.5" filter="url(#ccSoft)">
+      <circle cx="1150" cy="120" r="26" fill="#2dd4bf" opacity="0.30"/>
+      <circle cx="1320" cy="300" r="34" fill="#a78bfa" opacity="0.26"/>
+      <circle cx="1470" cy="150" r="22" fill="#5eead4" opacity="0.22"/>
+      <circle cx="1230" cy="230" r="40" fill="#7c5cff" opacity="0.16"/>
+      <circle cx="1410" cy="320" r="20" fill="#2dd4bf" opacity="0.20"/>
+      <circle cx="980" cy="270" r="30" fill="#a78bfa" opacity="0.14"/>
+    </g>
+
+    <!-- connections -->
+    <g fill="none" stroke-width="1.4" filter="url(#ccGlow)">
+      <line x1="1072" y1="206" x2="1186" y2="104" stroke="url(#ccEdgeT)"/>
+      <line x1="1072" y1="206" x2="1184" y2="300" stroke="url(#ccEdgeV)"/>
+      <line x1="1072" y1="206" x2="1288" y2="178" stroke="url(#ccEdgeT)"/>
+      <line x1="1186" y1="104" x2="1288" y2="178" stroke="url(#ccEdgeV)"/>
+      <line x1="1186" y1="104" x2="1392" y2="92" stroke="url(#ccEdgeT)"/>
+      <line x1="1184" y1="300" x2="1296" y2="288" stroke="url(#ccEdgeT)"/>
+      <line x1="1288" y1="178" x2="1296" y2="288" stroke="url(#ccEdgeV)"/>
+      <line x1="1288" y1="178" x2="1398" y2="232" stroke="url(#ccEdgeT)"/>
+      <line x1="1296" y1="288" x2="1398" y2="232" stroke="url(#ccEdgeV)"/>
+      <line x1="1392" y1="92" x2="1486" y2="158" stroke="url(#ccEdgeV)"/>
+      <line x1="1398" y1="232" x2="1486" y2="158" stroke="url(#ccEdgeT)"/>
+      <line x1="1398" y1="232" x2="1494" y2="306" stroke="url(#ccEdgeV)"/>
+      <line x1="1296" y1="288" x2="1358" y2="356" stroke="url(#ccEdgeT)"/>
+      <line x1="1288" y1="178" x2="1392" y2="92" stroke="url(#ccEdgeV)"/>
+    </g>
+
+    <!-- nodes -->
+    <g filter="url(#ccGlow)">
+      <circle cx="1072" cy="206" r="5" fill="url(#ccTealDot)"/>
+      <circle cx="1186" cy="104" r="4" fill="url(#ccVioDot)"/>
+      <circle cx="1184" cy="300" r="4.5" fill="url(#ccTealDot)"/>
+      <circle cx="1288" cy="178" r="6" fill="url(#ccVioDot)"/>
+      <circle cx="1296" cy="288" r="4" fill="url(#ccTealDot)"/>
+      <circle cx="1392" cy="92" r="4.5" fill="url(#ccTealDot)"/>
+      <circle cx="1398" cy="232" r="5.5" fill="url(#ccVioDot)"/>
+      <circle cx="1486" cy="158" r="4" fill="url(#ccTealDot)"/>
+      <circle cx="1494" cy="306" r="4.5" fill="url(#ccVioDot)"/>
+      <circle cx="1358" cy="356" r="3.5" fill="url(#ccTealDot)"/>
+    </g>
+  </svg>
+
+  <!-- vignette -->
+  <div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 160px 40px rgba(4,7,12,0.7);"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1584,&quot;height&quot;:396}}"></script>
+</body>
+</html>
